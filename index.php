@@ -14,20 +14,20 @@ $noOfWords = 0;
 
 if(isset($_REQUEST['subpass']) && $_REQUEST['subpass'] == "generate Password") {
 
+
 // all validations in this function
 function ValidateFormInputs($requestArray) {
 	$errArray = array();
 	$usesymbol = false;
 	$usenumber = false;
 	// expecting noofwords, usenumber, use symbol 
-	if(!empty($requestArray['noofwords']) && $requestArray['noofwords'] != null) {
+	if(!empty($requestArray['noofwords']) ) {
 	    if(is_numeric($requestArray['noofwords'])) {	    	
-	    	$requestArray['noofwords'] = intval($requestArray['noofwords']);
-	    	if($requestArray['noofwords'] <1) {
+	    	if(!intval($requestArray['noofwords'])) {
 	    		$errArray[] ="the Number of Words should be atleast 1";
 	    	}
 	    }
-	    elseif($requestArray['noofwords'] == "0") {
+	    else if($requestArray['noofwords'] === "0") {
 	    	$errArray[] ="the Number of Words should be atleast 1";
 	    }
 	    else {
@@ -35,7 +35,12 @@ function ValidateFormInputs($requestArray) {
 	    }
 	}
 	else {
+		if($requestArray['noofwords'] === "0") {
+						$errArray[] ="the Number of Words should be atleast 1";
+		}
+		else {
 		$errArray[] ="the Number of Words box is empty";
+	   }
 	}
   if(!empty($errArray)) {
 	return  array("error"=>true,"messages"=>$errArray);
@@ -107,13 +112,14 @@ $validate  = ValidateFormInputs($_REQUEST);
 	}
 
 } // end of form submit check
+
 ?>
 
 
 <form action="#" method="POST">
 <div>
  <label for="noofwords">No Of Words</label>
-  <input type="text" name="noofwords" value="<?php if(!empty($_REQUEST['noofwords'])) {echo $_REQUEST['noofwords'];}?>" maxlength="1" class="onechar">
+  <input type="text" name="noofwords" value="<?php if(!empty($_REQUEST['noofwords'])) {echo $_REQUEST['noofwords'];} else if($_REQUEST['noofwords'] === '0') { echo '0';}?>" maxlength="1" class="onechar">
   </div>
   <div>
   <label for="usenumber">Use Number?</label>
