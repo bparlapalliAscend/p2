@@ -10,4 +10,4 @@ Project 2 of the dwa15 course. To generate a random password of given number of 
 
 #### list of links:
 - URL to project: p2.bparlapalli.me
-- Link to screencast: http://screencast.com/t/LUcLvehX9RJj
+- Link to screencast: http://screencast.com/t/hfzKfl0uE
